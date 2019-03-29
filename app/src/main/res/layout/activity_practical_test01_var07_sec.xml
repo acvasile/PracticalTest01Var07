@@ -13,8 +13,8 @@
         android:columnCount="2"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/t00"
+        <TextView
+            android:id="@+id/At00"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -23,20 +23,20 @@
             android:hint="Insert text"
             android:gravity="center"
             />
-        <EditText
-            android:id="@+id/t01"
+        <TextView
+            android:id="@+id/At01"
             android:layout_row="0"
-            android:layout_column="1"            android:hint="Insert text"
-
+            android:layout_column="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="Insert text"
             android:layout_gravity="center"
             android:gravity="center"
             />
 
 
-        <EditText
-            android:id="@+id/t10"
+        <TextView
+            android:id="@+id/At10"
             android:layout_row="1"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -46,8 +46,8 @@
             android:gravity="center"
             />
 
-        <EditText
-            android:id="@+id/t11"
+        <TextView
+            android:id="@+id/At11"
             android:layout_row="1"
             android:layout_column="1"
             android:layout_width="wrap_content"
@@ -60,15 +60,30 @@
 
     </GridLayout>
 
-    <Button
-        android:id="@+id/set"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Insert text"
-        android:layout_gravity="center"
-        android:text="Set"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-        />
+        <Button
+            android:id="@+id/sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Insert text"
+            android:layout_gravity="center"
+            android:text="Sum"
+            />
+        <Button
+            android:id="@+id/prod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Insert text"
+            android:layout_gravity="center"
+            android:text="Product"
+            />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
