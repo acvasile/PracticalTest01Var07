@@ -1,6 +1,7 @@
 package ro.pub.cs.systems.eim.practicaltest01var07;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,15 @@ public class PracticalTest01Var07MainActivity extends AppCompatActivity {
         }
     }
 
+    MessageReceiver messageReceiver = new MessageReceiver();
+    IntentFilter intentFilter = new IntentFilter();
+
+    private static PracticalTest01Var07MainActivity activity;
+    public static PracticalTest01Var07MainActivity getInstance()
+    {
+        return activity;
+    }
+
     void restoreBundle(Bundle savedInstanceState)
     {
         if (savedInstanceState == null)
@@ -75,9 +85,27 @@ public class PracticalTest01Var07MainActivity extends AppCompatActivity {
         }
     }
 
+    void setText(final String a, final String b, final String c, final String d)
+    {
+        PracticalTest01Var07MainActivity.this.runOnUiThread(new Runnable() {
+            public void run() {
+                t00 = findViewById(R.id.t00);
+                t01 = findViewById(R.id.t01);
+                t10 = findViewById(R.id.t10);
+                t11 = findViewById(R.id.t11);
+
+                t00.setText(a);
+                t01.setText(b);
+                t10.setText(c);
+                t11.setText(d);
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_practical_test01_var07_main);
 
         t00 = findViewById(R.id.t00);
@@ -90,6 +118,30 @@ public class PracticalTest01Var07MainActivity extends AppCompatActivity {
         set = findViewById(R.id.set);
         ButLis butLis = new ButLis();
         set.setOnClickListener(butLis);
+
+        intentFilter.addAction("my.action");
+
+        Intent intent = new Intent(this, PracticalTest01Var07Service.class);
+        startService(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(messageReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(messageReceiver);
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent(this, PracticalTest01Var07Service.class);
+        stopService(intent);
+        super.onDestroy();
     }
 
     @Override
