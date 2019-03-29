@@ -50,6 +50,31 @@ public class PracticalTest01Var07MainActivity extends AppCompatActivity {
         }
     }
 
+    void restoreBundle(Bundle savedInstanceState)
+    {
+        if (savedInstanceState == null)
+        {
+            return;
+        }
+
+        if (savedInstanceState.containsKey("a"))
+        {
+            t00.setText(savedInstanceState.getString("a"));
+        }
+        if (savedInstanceState.containsKey("b"))
+        {
+            t01.setText(savedInstanceState.getString("b"));
+        }
+        if (savedInstanceState.containsKey("c"))
+        {
+            t10.setText(savedInstanceState.getString("c"));
+        }
+        if (savedInstanceState.containsKey("d"))
+        {
+            t11.setText(savedInstanceState.getString("d"));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +85,26 @@ public class PracticalTest01Var07MainActivity extends AppCompatActivity {
         t10 = findViewById(R.id.t10);
         t11 = findViewById(R.id.t11);
 
+        restoreBundle(savedInstanceState);
+
         set = findViewById(R.id.set);
         ButLis butLis = new ButLis();
         set.setOnClickListener(butLis);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("a", t00.getEditableText().toString());
+        outState.putString("b", t01.getEditableText().toString());
+        outState.putString("c", t10.getEditableText().toString());
+        outState.putString("d", t11.getEditableText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        restoreBundle(savedInstanceState);
     }
 }
